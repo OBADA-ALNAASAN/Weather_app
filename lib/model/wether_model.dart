@@ -30,10 +30,12 @@ class WeatherModel {
 
   String getLottie() {
     if (weatherStateName == 'Sunny' ||
-        weatherStateName == 'Clear' ||
-        weatherStateName == 'partly cloudy') {
+        weatherStateName == 'Clear' ) {
       return 'assets/SUNNY.json';
-    } else if (weatherStateName == 'Blizzard' ||
+    }else if(
+        weatherStateName == 'Partly Cloudy '){
+          return'assets/PartlyCLOUDY.json';
+        } else if (weatherStateName == 'Blizzard' ||
         weatherStateName == 'Patchy snow possible' ||
         weatherStateName == 'Patchy sleet possible' ||
         weatherStateName == 'Patchy freezing drizzle possible' ||
@@ -62,13 +64,13 @@ class WeatherModel {
 
   MaterialColor changeThemeColor() {
     if (weatherStateName == 'Sunny' ||
-        weatherStateName == 'Clear' ||
-        weatherStateName == 'partly cloudy') {
+        weatherStateName == 'Clear' ) {
       return Colors.orange;
     } else if (weatherStateName == 'Blizzard' ||
         weatherStateName == 'Patchy snow possible' ||
         weatherStateName == 'Patchy sleet possible' ||
-        weatherStateName == 'Patchy freezing drizzle possible' ||
+        weatherStateName == 'Patchy freezing drizzle possible'||
+        weatherStateName == 'Partly Cloudy ' ||
         weatherStateName == 'Blowing snow') {
       return Colors.blue ;
     } else if (weatherStateName == 'Freezing fog' ||

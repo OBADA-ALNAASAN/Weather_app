@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:weather_app/model/wether_model.dart';
-import 'package:weather_app/provider/weather_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:weather_app/services/weather_service.dart';
+import 'package:weather_app/cubits/wether_cubit/weather_cubit.dart';
 
 // ignore: must_be_immutable
 class SearchPage extends StatelessWidget {
@@ -27,16 +25,14 @@ class SearchPage extends StatelessWidget {
             onChanged: (value) {
               cityName = value;
             },
-            onSubmitted: (value,) async {
+            onSubmitted: (
+              value,
+            ) async {
               cityName = value;
-              WeatherService service = WeatherService();
-              WeatherModel? weather =
-                  await service.getWeather(cityName: cityName!);
-              Provider.of<WeatherProvider>(context, listen: false).weatherData =
-                  weather;
-              Provider.of<WeatherProvider>(context, listen: false).cityName =
-                  cityName;
 
+              BlocProvider.of<WeatherCubit>(context)
+                  .getWeather(cityName: cityName!);
+              BlocProvider.of<WeatherCubit>(context).cityName = cityName;
               Navigator.pop(context);
             },
             decoration: InputDecoration(
@@ -48,15 +44,11 @@ class SearchPage extends StatelessWidget {
               label: const Text('Search'),
               suffixIcon: IconButton(
                 onPressed: () async {
-                  WeatherService service = WeatherService();
-                  WeatherModel? weather =
-                      await service.getWeather(cityName: cityName!);
-                  Provider.of<WeatherProvider>(context, listen: false)
-                      .weatherData = weather;
-                  Provider.of<WeatherProvider>(context, listen: false)
-                      .cityName = cityName;
-
-                  Navigator.pop(context);
+                
+              BlocProvider.of<WeatherCubit>(context)
+                  .getWeather(cityName: cityName!);
+              BlocProvider.of<WeatherCubit>(context).cityName = cityName;
+              Navigator.pop(context);
                 },
                 icon: const Icon(Icons.search),
               ),
